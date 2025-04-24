@@ -5,14 +5,20 @@ import Card  from '@/components/Card'
 import trackEventsData from '@/data/trackEventsData.json';
 
 export default function TabTwoScreen() {
-    const [searchText, setSearchText] = useState('Search');
+    const [searchText, setSearchText] = useState('');
     const [filteredData, setFilteredData] = useState(trackEventsData)
 
     const handleSearch = (query: string) => {
         setSearchText(query);
         const filtered = trackEventsData.filter((item) => {
-            item.title.toLowerCase().includes(query.toLowerCase());
-        });
+                if (item.title.toLowerCase().includes(query.toLowerCase())) {
+                    return item.title.toLowerCase().includes(query.toLowerCase())
+                }
+                else {
+                    return item.type.toLowerCase().includes(query.toLowerCase())
+                }
+            }
+        );
         setFilteredData(filtered);
     };
 
@@ -21,15 +27,17 @@ export default function TabTwoScreen() {
         <View style={styles.header}>
             <Text style={styles.title}>Track Events</Text>
         </View>
-        <Divider />
+        <Divider style={{borderWidth: 1}} />
         <TextInput
             style={styles.input}
             onChangeText={setSearchText}
             value={searchText}
+            placeholder={'Search'}
         />
         <View style={styles.searchButton}>
             <Button
                 title={'Search'}
+                onPress={() => {handleSearch(searchText)}}
             />
         </View>
         <FlatList

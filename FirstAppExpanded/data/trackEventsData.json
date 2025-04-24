@@ -26,13 +26,13 @@
   {
     "title": "Long Jump",
     "type": "Jumps",
-    "description": "A 200 meter sprint starting on the curve of the track, focusing on top-end speed.",
+    "description": "A shortened run up until a white board where the athlete must jump as far as they can.",
     "record": "8.95 Meters"
   },
   {
-    "title": "200 Meter",
-    "type": "Sprints",
-    "description": "A 200 meter sprint starting on the curve of the track, focusing on top-end speed.",
+    "title": "Javelin",
+    "type": "Throws",
+    "description": "Throw a thin javelin soaring through the air as far as possible.",
     "record": "98.48 Meters"
   }
 ]
