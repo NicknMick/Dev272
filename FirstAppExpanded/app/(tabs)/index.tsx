@@ -20,8 +20,8 @@ export default function HomeScreen() {
         <HelloWave />
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
-          <ThemedText type="subtitle">Changing the home page of this app!</ThemedText>
-          <ThemedText>I am excited to create more throughout this class!</ThemedText>
+          <ThemedText type="subtitle">This is the home page!</ThemedText>
+          <ThemedText>To see searchable information, click on the "events" tab!</ThemedText>
       </ThemedView>
     </ParallaxScrollView>
   );

@@ -1,0 +1,38 @@
+[
+  {
+    "title": "100 Meter",
+    "type": "Sprints",
+    "description": "A full 100 meter sprint on the straightaway of the track.",
+    "record": "9.58 Seconds"
+  },
+  {
+    "title": "200 Meter",
+    "type": "Sprints",
+    "description": "A 200 meter sprint starting on the curve of the track, focusing on top-end speed.",
+    "record": "19.19 Seconds"
+  },
+  {
+    "title": "400 Meter",
+    "type": "Sprints",
+    "description": "A sprint around the entire track, showing strength, speed, and endurance",
+    "record": "43.03 Seconds"
+  },
+  {
+    "title": "110 Meter Hurdles",
+    "type": "Hurdles",
+    "description": "A sprint through the straightaway, having athletes jump over hurdles as quick as possible.",
+    "record": "12.80 Seconds"
+  },
+  {
+    "title": "Long Jump",
+    "type": "Jumps",
+    "description": "A 200 meter sprint starting on the curve of the track, focusing on top-end speed.",
+    "record": "8.95 Meters"
+  },
+  {
+    "title": "200 Meter",
+    "type": "Sprints",
+    "description": "A 200 meter sprint starting on the curve of the track, focusing on top-end speed.",
+    "record": "98.48 Meters"
+  }
+]
