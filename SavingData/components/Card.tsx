@@ -17,7 +17,6 @@ const Card: React.FC<Event> = ({ title, type, description, eventID, isFavorite, 
         });
     }
 
-
     return (
         <View style={styles.card}>
             <Text style={styles.title}>{title}</Text>

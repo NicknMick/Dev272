@@ -13,6 +13,7 @@ export type Event = {
 
 type EventContextType = {
     events: Event[];
+    addEvent: (event: Event) =>  void;
     toggleFavorite: (id: string) => void;
 }
 
@@ -29,8 +30,12 @@ export const EventProvider: React.FC<{ children: React.ReactNode }> = ({children
         );
     };
 
+    const addEvent = (event: Event) => {
+        setEvents((prev) => [...prev, event])
+    }
+
     return (
-        <EventContext.Provider value={{events, toggleFavorite}}>
+        <EventContext.Provider value={{events, toggleFavorite, addEvent}}>
             {children}
         </EventContext.Provider>
     )

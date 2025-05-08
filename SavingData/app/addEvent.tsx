@@ -1,17 +1,45 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet, Pressable, SafeAreaView, TextInput, Button} from 'react-native'
+import {View, Text, StyleSheet, TextInput, Button, Alert} from 'react-native'
 import {Picker} from "@react-native-picker/picker";
 import {Divider} from "@/components/ui/divider";
-import {Event, useEventContext} from "@/components/ui/event-context-provider";
-import {useLocalSearchParams, useRouter, Stack} from "expo-router";
-import trackEventsData from '@/data/trackEventsData.json'
+import {useEventContext} from "@/components/ui/event-context-provider";
+import {router, Stack} from "expo-router";
 import {Box} from "@/components/ui/box";
 
 
 export default function FullDetailsPage({route}) {
-    const { title, type, description, record, recordHolder } = useLocalSearchParams()
+    const { addEvent } = useEventContext()
 
-    const [eventType, setEventType] = useState("")
+    const [eventType, setEventType] = useState("");
+    const [eventTitle, setEventTitle] = useState("");
+    const [eventDesc, setEventDesc] = useState("");
+    const [eventRecord, setEventRecord] = useState("");
+    const [eventRecordHolder, setEventRecordHolder] = useState("")
+
+    const submitInfo = () => {
+        if (eventType === "" || eventTitle === "" || eventDesc === "" || eventRecord === "" || eventRecordHolder === "") {
+            Alert.alert("Info Invalid", "Some fields are invalid or empty!" [{text: "Ok"}])
+            return
+        }
+        addEvent({
+            eventID: eventTitle.toLowerCase().replace(/ /g,"_"),
+            title: eventTitle,
+            type: eventType,
+            description: eventDesc,
+            record: eventRecord,
+            recordHolder: eventRecordHolder,
+            isFavorite: false
+        });
+        setEventType("");
+        setEventTitle("");
+        setEventType("");
+        setEventDesc("");
+        setEventRecord("");
+        setEventRecordHolder("");
+        router.push({
+            pathname: '(tabs)/events'
+        })
+    }
 
     return (
         <View style={styles.container}>
@@ -25,6 +53,8 @@ export default function FullDetailsPage({route}) {
                     <Text style={styles.eventInfo}>Title:</Text>
                     <TextInput
                         style={styles.input}
+                        onChangeText={setEventTitle}
+                        value={eventTitle}
                         placeholder={'Type'}
                     />
                 </View>
@@ -33,7 +63,7 @@ export default function FullDetailsPage({route}) {
                     <View style={{borderWidth: 1, height: 40, margin: 12, justifyContent: 'center'}}>
                         <Picker
                             style={{width: 200}}
-                            mode={"dropdown"}
+                            mode={'dropdown'}
                             selectedValue={eventType}
                             onValueChange={(itemValue) => setEventType(itemValue)}
                         >
@@ -51,12 +81,16 @@ export default function FullDetailsPage({route}) {
                         style={styles.descInput}
                         multiline={true}
                         maxLength={100}
+                        onChangeText={setEventDesc}
+                        value={eventDesc}
                     />
                 </View>
                 <View style={styles.formData}>
                     <Text style={styles.eventInfo}>World Record:</Text>
                     <TextInput
                         style={styles.input}
+                        onChangeText={setEventRecord}
+                        value={eventRecord}
                         placeholder={'(Include Units)'}
                     />
                 </View>
@@ -64,11 +98,13 @@ export default function FullDetailsPage({route}) {
                     <Text style={styles.eventInfo}>Record Held By:</Text>
                     <TextInput
                         style={styles.input}
+                        onChangeText={setEventRecordHolder}
+                        value={eventRecordHolder}
                         placeholder={'Person'}
                     />
                 </View>
                 <View style={styles.submitButton}>
-                    <Button title={'Submit'} />
+                    <Button title={'Submit'} onPress={() => {submitInfo()}} />
                 </View>
             </Box>
         </View>
