@@ -9,7 +9,7 @@ export default function TabTwoScreen() {
     const favoriteEvents = events.filter(event => event.isFavorite)
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <View style={styles.container}>
         <View style={styles.header}>
             <Text style={styles.title}>Favorite Events</Text>
         </View>
@@ -18,7 +18,7 @@ export default function TabTwoScreen() {
             data={favoriteEvents}
             renderItem={({item}) => <Card {...item} />}
         />
-    </ScrollView>
+    </View>
   );
 }
 

@@ -7,7 +7,7 @@ import {router, Stack} from "expo-router";
 import {Box} from "@/components/ui/box";
 
 
-export default function FullDetailsPage({route}) {
+export default function CustomEventAdd() {
     const { addEvent } = useEventContext()
 
     const [eventType, setEventType] = useState("");
@@ -18,7 +18,7 @@ export default function FullDetailsPage({route}) {
 
     const submitInfo = () => {
         if (eventType === "" || eventTitle === "" || eventDesc === "" || eventRecord === "" || eventRecordHolder === "") {
-            Alert.alert("Info Invalid", "Some fields are invalid or empty!" [{text: "Ok"}])
+            Alert.alert("Info Invalid", "Some fields are invalid or empty!", [{text: "Ok"}]);
             return
         }
         addEvent({
@@ -67,11 +67,11 @@ export default function FullDetailsPage({route}) {
                             selectedValue={eventType}
                             onValueChange={(itemValue) => setEventType(itemValue)}
                         >
-                            <Picker.Item label={'Sprints'} value={'sprints'}/>
-                            <Picker.Item label={'Hurdles'} value={'hurdles'}/>
-                            <Picker.Item label={'Distance'} value={'distance'}/>
-                            <Picker.Item label={'Jumps'} value={'jumps'}/>
-                            <Picker.Item label={'Throws'} value={'throws'}/>
+                            <Picker.Item label={'Sprints'} value={'Sprints'}/>
+                            <Picker.Item label={'Hurdles'} value={'Hurdles'}/>
+                            <Picker.Item label={'Distance'} value={'Distance'}/>
+                            <Picker.Item label={'Jumps'} value={'Jumps'}/>
+                            <Picker.Item label={'Throws'} value={'Throws'}/>
                         </Picker>
                     </View>
                 </View>

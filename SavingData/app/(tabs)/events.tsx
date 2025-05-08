@@ -31,7 +31,7 @@ export default function TabTwoScreen() {
     }
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <View style={styles.container}>
         <View style={styles.header}>
             <Text style={styles.title}>Track Events</Text>
         </View>
@@ -61,7 +61,7 @@ export default function TabTwoScreen() {
                 <Card {...item}/>
             )}
         />
-    </ScrollView>
+    </View>
   );
 }
 
