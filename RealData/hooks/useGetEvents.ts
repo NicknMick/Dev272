@@ -3,14 +3,15 @@ import {useQuery} from "@tanstack/react-query";
 
 export const useGetEvents = () => {
     return useQuery({
-        queryKey: ['TrackEvents'],
+        queryKey: ['trackevents'],
         queryFn: async () => {
             const {data, error} = await supabase
-                .from('TrackEvents')
+                .from('trackevents')
                 .select('*')
             if (error) {
                 throw new Error(error.message)
             }
+
             return data;
         },
         staleTime: 1000 * 60 * 5,

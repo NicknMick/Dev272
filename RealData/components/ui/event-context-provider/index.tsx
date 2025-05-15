@@ -1,5 +1,6 @@
 import React, {createContext, useContext, useEffect, useState} from "react";
 import {useGetEvents} from "@/hooks/useGetEvents";
+import {SupabaseNewEvent, useAddEvent} from "@/hooks/useAddEvent";
 
 export type Event = {
     title: string;
@@ -12,9 +13,9 @@ export type Event = {
 }
 
 type EventContextType = {
-    isLoading: boolean
+    isLoading: boolean;
     events: Event[];
-    addEvent: (event: Event) =>  void;
+    addEvent: (event: SupabaseNewEvent) => void;
     toggleFavorite: (id: string) => void;
 }
 
@@ -22,6 +23,8 @@ const EventContext = createContext<EventContextType | undefined>(undefined);
 
 export const EventProvider: React.FC<{ children: React.ReactNode }> = ({children}) => {
     const {data, isFetching} = useGetEvents();
+    const addEventMutation = useAddEvent();
+    //const updateEventMutation
 
     const [events, setEvents] = useState<Event[]>([]);
 
@@ -33,9 +36,9 @@ export const EventProvider: React.FC<{ children: React.ReactNode }> = ({children
         );
     };
 
-    const addEvent = (event: Event) => {
-        setEvents((prev) => [...prev, event])
-    }
+    const addEvent = async (event: SupabaseNewEvent) => {
+        addEventMutation.mutate(event);
+    };
 
     useEffect(() => {
         if (data && !isFetching) {
@@ -48,7 +51,7 @@ export const EventProvider: React.FC<{ children: React.ReactNode }> = ({children
     }, [data, isFetching])
 
     return (
-        <EventContext.Provider value={{isLoading: isFetching, events, toggleFavorite, addEvent}}>
+        <EventContext.Provider value={{isLoading: isFetching || addEventMutation.isPending, events, toggleFavorite, addEvent}}>
             {children}
         </EventContext.Provider>
     )
