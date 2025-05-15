@@ -1,50 +1,20 @@
-# Welcome to your Expo app 👋
-
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
-
-## Get started
-
-1. Install dependencies
-
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-    npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
+Supabase Config and table setup
 ```bash
-npm run reset-project
+I got my supabase table data to match my original events JSON file.
+It consists of having a unique ID for the table which is automatically
+generated, the title, type, description, world record, and record holder.
 ```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+How React-Query is used
+```bash
+I implented react-query in this assignment for fetching data from supabase,
+allowing me to easily set my data in a constant, and be prepared for any 
+errors that may arise when retrieving that data. If it does, it will throw
+out an error message explaining what happened.
+```
+How AsyncStorage was used
+```bash
+I tried to get AsyncStorage to work correctly in my project, and I was
+able to get it to save data after it was fetched, but then it got stuck 
+loading constantly before the app actually built, so I had to back away
+from the use of it unfortunately.
+```
