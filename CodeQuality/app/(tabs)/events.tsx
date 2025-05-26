@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   StyleSheet,
   TextInput,
-  ScrollView,
   View,
   Text,
   Button,
@@ -29,6 +28,18 @@ export default function EventsScreen() {
     });
     setFilteredData(filtered);
   };
+
+  useEffect(() => {
+    if (searchText === "") {
+      setFilteredData(events);
+    }
+    else {
+      const filtered = events.filter((item) =>
+        item.title.toLowerCase().includes(searchText.toLowerCase()),
+      );
+      setFilteredData(filtered);
+    }
+  }, [events]);
 
   const addEventPress = () => {
     router.push({

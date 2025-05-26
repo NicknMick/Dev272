@@ -1,4 +1,4 @@
-import { render, fireEvent } from '@testing-library/react-native';
+import { render, fireEvent, screen } from '@testing-library/react-native';
 import EventsScreen from '@/app/(tabs)/events';
 import mockData from '../../../data/trackEventsData.json';
 import { useGetEvents } from '@/hooks/useGetEvents';
@@ -12,10 +12,8 @@ jest.mock('@/hooks/useGetEvents', () => ({
 }));
 
 describe('EventsScreen', () => {
-  const mockedUseGetEvents = useGetEvents as jest.Mock
-
   beforeEach(() => {
-    mockedUseGetEvents.mockReturnValue({
+    (useGetEvents as jest.Mock).mockReturnValue({
       data: mockData,
       isFetching: false,
     });
@@ -25,8 +23,8 @@ describe('EventsScreen', () => {
     jest.clearAllMocks();
   });
 
-  test("Renders a list of events", async () => {
-    const { getByText } = render(
+  test("Renders a list of events",  () => {
+    render(
       <QueryClientProvider client={createTestClient}>
       <EventProvider>
         <EventsScreen />
@@ -34,14 +32,13 @@ describe('EventsScreen', () => {
     </QueryClientProvider>
     );
 
-
-    expect(getByText('100 Meter')).toBeTruthy();
-    expect(getByText('Long Jump')).toBeTruthy();
-    expect(getByText('Javelin')).toBeTruthy();
+    mockData.forEach((event) => {
+      expect(screen.getByText(event.title)).toBeOnTheScreen();
+    });
   });
 
   test("Filters the list through search", async () => {
-    const { getByPlaceholderText, getByText, queryByText } = render(
+    render(
       <QueryClientProvider client={createTestClient}>
         <EventProvider>
           <EventsScreen />
@@ -49,12 +46,12 @@ describe('EventsScreen', () => {
       </QueryClientProvider>
     );
 
-    const input = getByPlaceholderText('Search');
+    const input = screen.getByPlaceholderText('Search');
     fireEvent.changeText(input, 'Long Jump')
-    fireEvent.press(getByText('Search'))
+    fireEvent.press(screen.getByText('Search'))
 
-    expect(queryByText('100 Meter')).toBeNull();
-    expect(getByText('Long Jump')).toBeTruthy();
-    expect(queryByText('Javelin')).toBeNull();
+    expect(screen.queryByText('100 Meter')).toBeNull();
+    expect(screen.getByText('Long Jump')).toBeTruthy();
+    expect(screen.queryByText('Javelin')).toBeNull();
   })
 })
